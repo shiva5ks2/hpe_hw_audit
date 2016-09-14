@@ -1,0 +1,57 @@
+
+ARTNTNBIVIS-A-VZ-Prc1-03# show config
+
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ARTNTNBIVIS-A-VZ-Prc1-03"
+time timezone -300
+interface 23
+   disable
+   lacp Active
+exit
+interface 24
+   disable
+   lacp Active
+exit
+
+vlan 1 name "DEFAULT_VLAN"
+
+vlan 1
+   name "DEFAULT_VLAN"
+   untagged 1-24
+   ip address dhcp-bootp
+   exit
+lldp admin-status 15,17-20 disable
+mirror 1 port 15
+timesync sntp
+sntp unicast
+sntp server priority 1 10.192.118.2 4
+sntp server priority 2 10.192.118.3 4
+no telnet-server
+interface 17
+   monitor all both mirror 1
+   exit
+interface 18
+   monitor all both mirror 1
+   exit
+interface 19
+   monitor all both mirror 1
+   exit
+interface 20
+   monitor all both mirror 1
+   exit
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "ARTNTNBI"
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+h

@@ -1,0 +1,334 @@
+annapolisJunction-c7k1: 10.213.105 p show config
+[87;27Hshow confi[87;27H[?25h[87;37H[87;37Hg[87;37H[?25h[87;38H[87;0HE[87;1H[87;38H[87;1H[2K[87;1H[?25h[87;1H[1;87r[87;1H
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ANJTMDAHVIS-A-VZ-Prc1-06" 
+time timezone -240 
+interface 14 
+   disable
+exit
+interface 15 
+   disable
+exit
+interface 21 
+   disable
+exit
+interface 22 
+   disable
+exit
+trunk 23-24 Trk1 Trunk 
+ip default-gateway 10.213.105.1 
+ip routing 
+vlan 1 
+   name "VLAN1" 
+   untagged 21-22 
+   ip address dhcp-bootp 
+   no untagged 1-20,Trk1 
+   exit 
+vlan 100 
+   name "Data" 
+   untagged 20 
+   no ip address 
+   exit 
+vlan 200 
+   name "iSCSI" 
+   untagged 1-8,14-15,17 
+   no ip address 
+   exit 
+vlan 68 
+   name "Management" 
+   ip address 10.213.105.8 255.255.255.0 
+   exit 
+vlan 2 
+   name "Storage" 
+   untagged 9-13,16,18-19,Trk1 
+   no ip address 
+   jumbo 
+   exit 
+console inactivity-timer 30
+timesync sntp
+sntp unicast
+sntp server priority 1 10.213.105.2 3
+sntp server priority 2 10.213.105.3 3
+no telnet-server
+ip route 0.0.0.0 0.0.0.0 10.213.105.1
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "ANJTMDAH"
+spanning-tree
+spanning-tree Trk1 priority 4
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+
+[1;87r[87;1H[87;1H[2K[87;1H[?25h[87;1H[87;1HANJTMDAHVIS-A-VZ-Prc1-06# [87;1H[87;27H[87;1H[?25h[87;27H
+annapolisJunction-c7k1: 10.213.105 p show config
+[87;27Hshow confi[87;27H[?25h[87;37H[87;37Hg[87;37H[?25h[87;38H[87;0HE[87;1H[87;38H[87;1H[2K[87;1H[?25h[87;1H[1;87r[87;1H
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ANJTMDAHVIS-A-VZ-Prc1-03" 
+time timezone -240 
+vlan 1 
+   name "DEFAULT_VLAN" 
+   untagged 1-24 
+   ip address dhcp-bootp 
+   exit 
+lldp admin-status 15,17-24 disable 
+mirror 1 port 15
+mirror 2 port 14
+timesync sntp
+sntp unicast
+sntp server priority 1 10.213.105.2 4
+sntp server priority 2 10.213.105.3 4
+no telnet-server
+interface 17
+   monitor all both mirror 1
+   exit
+interface 18
+   monitor all both mirror 1
+   exit
+interface 19
+   monitor all both mirror 1
+   exit
+interface 20
+   monitor all both mirror 1
+   exit
+interface 21
+   monitor all both mirror 2
+   exit
+interface 22
+   monitor all both mirror 2
+   exit
+interface 23
+   monitor all both mirror 2
+   exit
+interface 24
+   monitor all both mirror 2
+   exit
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "AnnapolisJunction"
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+
+[1;87r[87;1H[87;1H[2K[87;1H[?25h[87;1H[87;1HANJTMDAHVIS-A-VZ-Prc1-03# [87;1H[87;27H[87;1H[?25h[87;27H
+annapolisJunction-c7k1: 10.213.105 p show config
+[87;27Hshow confi[87;27H[?25h[87;37H[87;37Hg[87;37H[?25h[87;38H[87;0HE[87;1H[87;38H[87;1H[2K[87;1H[?25h[87;1H[1;87r[87;1H
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ANJTMDAHVIS-A-VZ-Prc1-04" 
+time timezone -240 
+vlan 1 
+   name "DEFAULT_VLAN" 
+   untagged 1-24 
+   ip address dhcp-bootp 
+   exit 
+lldp admin-status 15,17-24 disable 
+mirror 1 port 15
+mirror 2 port 14
+timesync sntp
+sntp unicast
+sntp server priority 1 10.213.105.2 4
+sntp server priority 2 10.213.105.3 4
+no telnet-server
+interface 17
+   monitor all both mirror 1
+   exit
+interface 18
+   monitor all both mirror 1
+   exit
+interface 19
+   monitor all both mirror 1
+   exit
+interface 20
+   monitor all both mirror 1
+   exit
+interface 21
+   monitor all both mirror 2
+   exit
+interface 22
+   monitor all both mirror 2
+   exit
+interface 23
+   monitor all both mirror 2
+   exit
+interface 24
+   monitor all both mirror 2
+   exit
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "AnnapolisJunction"
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+
+[1;87r[87;1H[87;1H[2K[87;1H[?25h[87;1H[87;1HANJTMDAHVIS-A-VZ-Prc1-04# [87;1H[87;27H[87;1H[?25h[87;27H
+annapolisJunction-c7k1: 10.213.105 p show config
+[87;27Hshow confi[87;27H[?25h[87;37H[87;37Hg[87;37H[?25h[87;38H[87;0HE[87;1H[87;38H[87;1H[2K[87;1H[?25h[87;1H[1;87r[87;1H
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ANJTMDAHVIS-A-VZ-Prc1-05" 
+time timezone -240 
+interface 14 
+   disable
+exit
+interface 15 
+   disable
+exit
+interface 21 
+   disable
+exit
+interface 22 
+   disable
+exit
+trunk 23-24 Trk1 Trunk 
+ip default-gateway 10.213.105.1 
+ip routing 
+vlan 1 
+   name "VLAN1" 
+   untagged 21-22 
+   ip address dhcp-bootp 
+   no untagged 1-20,Trk1 
+   exit 
+vlan 100 
+   name "Data" 
+   untagged 20 
+   no ip address 
+   exit 
+vlan 200 
+   name "iSCSI" 
+   untagged 1-8,14-15,17 
+   no ip address 
+   exit 
+vlan 68 
+   name "Management" 
+   ip address 10.213.105.7 255.255.255.0 
+   exit 
+vlan 2 
+   name "Storage" 
+   untagged 9-13,16,18-19,Trk1 
+   no ip address 
+   jumbo 
+   exit 
+console inactivity-timer 30
+timesync sntp
+sntp unicast
+sntp server priority 1 10.213.105.2 3
+sntp server priority 2 10.213.105.3 3
+no telnet-server
+ip route 0.0.0.0 0.0.0.0 10.213.105.1
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "ANJTMDAH"
+spanning-tree
+spanning-tree Trk1 priority 4
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+
+[1;87r[87;1H[87;1H[2K[87;1H[?25h[87;1H[87;1HANJTMDAHVIS-A-VZ-Prc1-05# [87;1H[87;27H[87;1H[?25h[87;27H
+annapolisJunction-c7k1: 10.213.105 p show config
+[87;27Hshow confi[87;27H[?25h[87;37H[87;37Hg[87;37H[?25h[87;38H[87;0HE[87;1H[87;38H[87;1H[2K[87;1H[?25h[87;1H[1;87r[87;1H
+Startup configuration:
+
+; 516733-B21 Configuration Editor; Created on release #Z.14.51
+
+hostname "ANJTMDAHVIS-A-VZ-Prc1-06" 
+time timezone -240 
+interface 14 
+   disable
+exit
+interface 15 
+   disable
+exit
+interface 21 
+   disable
+exit
+interface 22 
+   disable
+exit
+trunk 23-24 Trk1 Trunk 
+ip default-gateway 10.213.105.1 
+ip routing 
+vlan 1 
+   name "VLAN1" 
+   untagged 21-22 
+   ip address dhcp-bootp 
+   no untagged 1-20,Trk1 
+   exit 
+vlan 100 
+   name "Data" 
+   untagged 20 
+   no ip address 
+   exit 
+vlan 200 
+   name "iSCSI" 
+   untagged 1-8,14-15,17 
+   no ip address 
+   exit 
+vlan 68 
+   name "Management" 
+   ip address 10.213.105.8 255.255.255.0 
+   exit 
+vlan 2 
+   name "Storage" 
+   untagged 9-13,16,18-19,Trk1 
+   no ip address 
+   jumbo 
+   exit 
+console inactivity-timer 30
+timesync sntp
+sntp unicast
+sntp server priority 1 10.213.105.2 3
+sntp server priority 2 10.213.105.3 3
+no telnet-server
+ip route 0.0.0.0 0.0.0.0 10.213.105.1
+snmp-server community "2Y2LHTZP31" operator
+snmp-server host 10.194.102.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.194.236.206 community "2Y2LHTZP31" trap-level not-info
+snmp-server host 10.136.239.161 community "2Y2LHTZP31" trap-level not-info
+snmp-server contact "VZW Admin" location "ANJTMDAH"
+spanning-tree
+spanning-tree Trk1 priority 4
+oobm
+   ip address dhcp-bootp
+   exit
+no tftp client
+no tftp server
+password manager
+password operator
+
+[1;87r[87;1H[87;1H[2K[87;1H[?25h[87;1H[87;1HANJTMDAHVIS-A-VZ-Prc1-06# [87;1H[87;27H[87;1H[?25h[87;27H

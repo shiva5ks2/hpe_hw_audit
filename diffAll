@@ -1,0 +1,92 @@
+#!/usr/bin/env python
+import time
+import os
+import errno
+import glob
+
+import tempfile
+import argparse
+
+import subprocess
+
+oa_config	= ('OA/diffOA.py',	'Golden_Config/OA.CONFIG',	'_OA_',	'OA')
+vc_config	= ('VC/diffVC.py',	'Golden_Config/VC.CONFIG',	'_VC_', 'VCM')
+p2000_config	= ('P2000/diffP2K.py',	'Golden_Config/P2000.CONFIG',	'_P2K_', 'P2000')
+procurve_config	= ('ProCurve/diffPC.py','Golden_Config/ProCurve.CONFIG','_ProCurve_', 'ProCurve')
+
+def diffCall(config, cwd, configdir, outdir):
+
+	# XLSX name and directory.
+	if outdir:
+		xlsx_name = '%s/%s.xlsx' % (outdir, config[3])
+	else:
+		# Create xlsx in current directory
+		xlsx_name = '%s.xlsx' % config[3]
+
+	# Create a temp file in which we will dump list of related config files.
+	f = tempfile.NamedTemporaryFile(delete=True)
+	#print f.name
+
+	# Get all related config files in configdir in one list
+	search_pattern = "%s/*%s*.txt" % (configdir, config[2])
+	flist = glob.glob(search_pattern)
+
+	if flist:
+		# Enter list into temp file
+		for item in flist:
+			f.write("%s\n" % item)
+	else:
+		print "No %s configuration data found in %s directory." % (config[3], configdir)
+		f.close()
+		return
+
+	f.flush()
+	cmd_args = "%s/%s -g %s/%s -f %s -o %s" % (cwd, config[0], cwd, config[1], f.name, xlsx_name)
+	#print cmd_args
+	if os.path.isfile(config[0]) and os.path.isfile(config[1]):
+		subprocess.call(cmd_args.split())
+	else:
+		print("One of the two files, %s or %s is missing." % (config[0], config[1]))
+		f.close()
+		return
+	
+	f.close()
+	return
+
+def get_args():
+	# Assign description to the help doc
+	parser = argparse.ArgumentParser(
+		description='Script compares OA/VC/P2000/ProCurve files against a golden configuration')
+	parser.add_argument('-c', '--configdir', type=str, help='Directory in which the configuration files are present.', required=True)
+	parser.add_argument('-o', '--outdir', type=str, help='Directory in which the output XLSX should be placed.', required=False)
+	# Array for all arguments passed to script
+	args = parser.parse_args()
+
+	# Assign args to variables
+	configdir = args.configdir
+	outdir    = args.outdir
+
+	# Return all variable values
+	return configdir, outdir
+
+if __name__ == "__main__":
+	configdir, outdir = get_args()
+
+	cwd = os.path.dirname(os.path.realpath(__file__))
+
+	if not os.path.isdir(configdir):
+		print "Directory %s does not exist. Nothing to do. Exiting..."
+		sys.exit(1)
+
+	# If an output directory is specified, create it if it does not exist already.
+	if outdir and not os.path.isdir(outdir):
+		try:
+			os.makedirs(outdir)
+		except OSError as exception:
+			raise
+	
+	diffCall(oa_config, cwd, configdir, outdir)
+	diffCall(vc_config, cwd, configdir, outdir)
+	diffCall(p2000_config, cwd, configdir, outdir)
+	diffCall(procurve_config, cwd, configdir, outdir)
+
